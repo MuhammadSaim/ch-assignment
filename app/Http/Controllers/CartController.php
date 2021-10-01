@@ -59,6 +59,7 @@ class CartController extends Controller {
                 ],
             ];
             session()->put( 'cart', $cart );
+            return redirect()->back();
         }
         // if cart not empty then check if this product exist then increment quantity
         if ( isset( $cart[$company->id] ) ) {
