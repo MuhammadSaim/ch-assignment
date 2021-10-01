@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
-                                        <a href="https://google.com">
+                                        <a href="{{ route('company.detail',$company) }}">
                                             {{ $company->root_domain }}
                                         </a>
                                     </div>
