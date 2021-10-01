@@ -32,33 +32,35 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($companies as $company)
-                        <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="{{ $company->logo }}" alt="">
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">
-                                {{ $company->root_domain }}
-                            </div>
-                        </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">{{ $company->rank }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            {{ number_format($company->linking_root_domains) }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $company->domain_authority }}
-                    </td>
-                    </tr>
+                        <tr class="click-link" data-href="{{ route('company.detail',$company) }}">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img class="h-10 w-10 rounded-full" src="{{ $company->logo }}" alt="">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        <a href="https://google.com">
+                                            {{ $company->root_domain }}
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ $company->rank }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    {{ number_format($company->linking_root_domains) }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $company->domain_authority }}
+                            </td>
+                        </tr>
                     @endforeach
-                    <!-- More people... -->
+                    <!-- More companies... -->
                 </tbody>
                 </table>
             </div>

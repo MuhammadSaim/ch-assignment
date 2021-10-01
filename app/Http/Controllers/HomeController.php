@@ -20,4 +20,16 @@ class HomeController extends Controller {
         return view( 'home', compact( 'companies' ) );
     }
 
+    /**
+     * company detail page which showes the details of the single company
+     *
+     * @param Request $request
+     * @param Company $company
+     * @return View
+     */
+    public function companyDetail( Request $request, Company $company ): View {
+        // dd( session( 'cart' ) );
+        return view( 'detail', compact( 'company' ) );
+    }
+
 }
