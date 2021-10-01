@@ -5,19 +5,19 @@
                 <div class="w-1/3 mr-3">
                     <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                         <label for="name" class="block text-xs font-medium text-gray-900">Name or website</label>
-                        <input type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g apple or apple.com">
+                        <input @if(request()->has('name')) value="{{ request()->get('name') }}" @endif type="text" name="name" id="name" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g apple or apple.com">
                     </div>
                 </div>
                 <div class="w-1/3 mr-3">
                     <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                         <label for="domain_authority" class="block text-xs font-medium text-gray-900">Domain Authority</label>
-                        <input type="text" name="domain_authority" id="domain_authority" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g 77">
+                        <input @if(request()->has('domain_authority')) value="{{ request()->get('domain_authority') }}" @endif type="text" name="domain_authority" id="domain_authority" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g 77">
                     </div>
                 </div>
                 <div class="w-1/3 mr-3">
                     <div class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                         <label for="root_domain_count" class="block text-xs font-medium text-gray-900">Root domains count</label>
-                        <input type="text" name="root_domain_count" id="root_domain_count" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g 77000">
+                        <input @if(request()->has('root_domain_count')) value="{{ request()->get('root_domain_count') }}" @endif type="text" name="root_domain_count" id="root_domain_count" class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm text-left" placeholder="e.g 77000">
                     </div>
                 </div>
                 <div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class HomeController extends Controller {
      * @return View
      */
     public function index( Request $request ): View {
-        return view( 'home' );
+        $companies = Company::searchCompanies( $request->all() );
+        $companies = $companies->paginate( 10 )->appends( request()->query() );
+        return view( 'home', compact( 'companies' ) );
     }
 
 }
