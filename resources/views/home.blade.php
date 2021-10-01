@@ -32,7 +32,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($companies as $company)
-                        <tr class="click-link" data-href="{{ route('company.detail',$company) }}">
+                        <tr class="click-link hover:bg-gray-100 cursor-pointer" data-href="{{ route('company.detail',$company) }}">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
