@@ -20,3 +20,6 @@ Route::get( '/company/{company}', [HomeController::class, 'companyDetail'] )->na
 Route::post( '/cart/add/{company}', [CartController::class, 'addToCart'] )->name( 'cart.add' );
 Route::get( '/cart', [CartController::class, 'index'] )->name( 'cart' );
 Route::get( '/cart/remove-item/{id}', [CartController::class, 'removeItem'] )->name( 'cart.remove.item' );
+Route::post( '/cart/checkout', [CartController::class, 'checkout'] )->name( 'cart.checkout' );
+Route::get( '/checkout/cancel', [CartController::class, 'checkoutCancel'] )->name( 'checkout.cancel' );
+Route::get( '/checkout/success', [CartController::class, 'checkoutSuccess'] )->name( 'checkout.success' );

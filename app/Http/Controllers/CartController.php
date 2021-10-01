@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Stripe\Stripe;
 
 class CartController extends Controller {
+
+    public function __construct() {
+        Stripe::setApiKey( env( 'STRIPE_SECRET_KEY' ) );
+    }
 
     /**
      * show the cart page
@@ -35,7 +39,7 @@ class CartController extends Controller {
             session()->put( 'cart', $cart );
             return redirect()->back();
         }
-        return new RouteNotFoundException();
+        return abort( 404 );
     }
 
     /**
@@ -71,6 +75,61 @@ class CartController extends Controller {
         ];
         session()->put( 'cart', $cart );
         return redirect()->back();
+    }
+
+    /**
+     * checkout process to charge ammount from the user
+     *
+     * @return RedirectResponse
+     */
+    public function checkout(): RedirectResponse {
+        $cart = session()->get( 'cart' );
+        if ( !empty( $cart ) ) {
+            $payment_array = [];
+
+            foreach ( session()->get( 'cart' ) as $cart ) {
+                array_push( $payment_array, [
+                    'price_data' => [
+                        'currency'     => 'usd',
+                        'product_data' => [
+                            'name' => $cart['name'],
+                        ],
+                        'unit_amount'  => 50 * 100,
+                    ],
+                    'quantity'   => $cart['quantity'],
+                ] );
+            }
+
+            $session = \Stripe\Checkout\Session::create( [
+                'payment_method_types' => ['card'],
+                'line_items'           => [$payment_array],
+                'mode'                 => 'payment',
+                'success_url'          => route( 'checkout.success' ),
+                'cancel_url'           => route( 'checkout.cancel' ),
+            ] );
+            return redirect( $session->url );
+        }
+
+        return abort( 404 );
+    }
+
+    /**
+     * callback url on stripe cancel
+     *
+     * @return View
+     */
+    public function checkoutCancel(): View {
+        return view( 'cancel' );
+    }
+
+    /**
+     * callback url on stripe success
+     *
+     * @return View
+     */
+    public function checkoutSuccess(): View {
+        session()->forget( 'cart' );
+        return view( 'success' );
     }
 
 }
